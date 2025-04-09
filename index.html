@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora de Aranceles</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 400px;
+      margin: 40px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+    label, select, input {
+      display: block;
+      margin: 10px 0;
+      width: 100%;
+    }
+    input[type="number"] {
+      padding: 8px;
+    }
+    button {
+      padding: 10px;
+      background-color: #007BFF;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #resultado {
+      margin-top: 20px;
+      font-weight: bold;
+      background: #f5f5f5;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Calculadora de Aumento por Arancel</h2>
+
+  <label for="precio">Precio del producto (USD):</label>
+  <input type="number" id="precio" placeholder="Ej: 100" min="0" step="0.01">
+
+  <label for="arancel">Porcentaje de arancel:</label>
+  <select id="arancel">
+    <option value="10">10%</option>
+    <option value="125">125%</option>
+  </select>
+
+  <button onclick="calcular()">Calcular nuevo precio</button>
+
+  <div id="resultado"></div>
+
+  <script>
+    function calcular() {
+      var precio = parseFloat(document.getElementById('precio').value);
+      var arancel = parseFloat(document.getElementById('arancel').value);
+      var resultado = document.getElementById('resultado');
+
+      if (isNaN(precio) || precio <= 0) {
+        resultado.innerHTML = "Por favor, ingresa un precio válido.";
+        return;
+      }
+
+      var aumento = (precio * arancel) / 100;
+      var nuevoPrecio = precio + aumento;
+
+      resultado.innerHTML = `
+        Aumento: $${aumento.toFixed(2)}<br>
+        Nuevo precio: $${nuevoPrecio.toFixed(2)}
+      `;
+    }
+  </script>
+
+</body>
+</html>
